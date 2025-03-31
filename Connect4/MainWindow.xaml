@@ -5,5 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Connect4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="800" Width="800" Initialized="Window_Initialized">
+    <Grid Name="Rectangles" Margin="45,24,45,8">
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="0,0,0,0" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="100,0,0,0" Grid.Column="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="200,0,0,0" Grid.Column="3"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="300,0,0,0" Grid.Column="4"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="400,0,0,0" Grid.Column="5"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="500,0,0,0" Grid.Column="6"/>
+        <Rectangle HorizontalAlignment="Left" Height="737" Stroke="Black" Fill="Black" VerticalAlignment="Center" Width="100" Margin="600,0,0,0" Grid.Column="7"/>
+
+    </Grid>
 </Window>

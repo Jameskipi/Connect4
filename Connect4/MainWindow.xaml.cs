@@ -20,5 +20,30 @@ namespace Connect4
         {
             InitializeComponent();
         }
+
+        private void Rectangle_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            if (sender is Rectangle rectangle)
+            {
+                rectangle.Fill = Brushes.Aqua;
+            }
+        }
+
+        private void Rectangle_MouseLeave(object sender, RoutedEventArgs e)
+        {
+            if (sender is Rectangle rectangle)
+            {
+                rectangle.Fill = Brushes.Black;
+            }
+        }
+
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            foreach (Rectangle rect in Rectangles.Children)
+            {
+                rect.AddHandler(Rectangle.MouseEnterEvent, new RoutedEventHandler(Rectangle_MouseEnter));
+                rect.AddHandler(Rectangle.MouseLeaveEvent, new RoutedEventHandler(Rectangle_MouseLeave));
+            }
+        }
     }
 }
