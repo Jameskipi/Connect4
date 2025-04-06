@@ -35,7 +35,7 @@ namespace ConnectFour
 
             for (int i = 0; i < 7; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 6; j++)
                 {
                     var circle = new Ellipse
                     {
@@ -52,54 +52,6 @@ namespace ConnectFour
 
                     Playground.Children.Add(circle);
                 }
-            }
-        }
-
-        private void Red_Turn(string column_number) 
-        {
-            try
-            {
-                // Get last free space in this column
-                var pawn = Playground.Children.OfType<Ellipse>()
-                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
-                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
-                    .ToArray()
-                    .Last();
-
-
-                // Add new pawn
-                GLOBALS.redpawns.Add(pawn);
-                pawn.Fill = Brushes.Red;
-                TestLabel.Content = pawn.Name;
-            }
-            catch (InvalidOperationException)
-            {
-                // Do nothing if there's no free space on the board in this column
-                return;
-            }
-        }
-
-        private void Yellow_Turn(string column_number)
-        {
-            try
-            {
-                // Get last free space in this column
-                var pawn = Playground.Children.OfType<Ellipse>()
-                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
-                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
-                    .ToArray()
-                    .Last();
-
-
-                // Add new pawn
-                GLOBALS.redpawns.Add(pawn);
-                pawn.Fill = Brushes.Gold;
-                TestLabel.Content = pawn.Name;
-            }
-            catch (InvalidOperationException)
-            {
-                // Do nothing if there's no free space on the board in this column
-                return;
             }
         }
 
