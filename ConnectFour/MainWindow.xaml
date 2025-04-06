@@ -12,15 +12,15 @@
         <Canvas Background="DodgerBlue" Name="Playground"></Canvas>
 
         <Grid Name="Rectangles">
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="0,0,0,0" Grid.Column="1"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="100,0,0,0" Grid.Column="2"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="200,0,0,0" Grid.Column="3"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="300,0,0,0" Grid.Column="4"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="400,0,0,0" Grid.Column="5"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="500,0,0,0" Grid.Column="6"/>
-            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="600,0,0,0" Grid.Column="7"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="0,0,0,0" Grid.Column="0" Name="r0"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="100,0,0,0" Grid.Column="1" Name="r1"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="200,0,0,0" Grid.Column="2" Name="r2"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="300,0,0,0" Grid.Column="3" Name="r3"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="400,0,0,0" Grid.Column="4" Name="r4"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="500,0,0,0" Grid.Column="5" Name="r5"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="600,0,0,0" Grid.Column="6" Name="r6"/>
         </Grid>
-
+        <Label Content="Label" Canvas.Left="339" Canvas.Top="769" HorizontalAlignment="Center" VerticalAlignment="Top" Name="TestLabel"/>
     </Grid>
-    
+
 </Window>

@@ -16,6 +16,12 @@ namespace ConnectFour
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static class GLOBALS
+        {
+            public static List<Ellipse> redpawns = [];
+            public static List<Ellipse> bluepawns = [];
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,6 +29,8 @@ namespace ConnectFour
 
         private void Add_Circles()
         {
+            // Create circles on the board
+
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 7; j++)
@@ -47,18 +55,53 @@ namespace ConnectFour
 
         private void Rectangle_MouseEnter(object sender, RoutedEventArgs e)
         {
-            if (sender is Rectangle rectangle)
+            if (sender is not Rectangle rectangle)
             {
-                rectangle.Fill = Brushes.Black;
-                rectangle.Opacity = 0.1;
+                return;
             }
+
+            rectangle.Fill = Brushes.Black;
+            rectangle.Opacity = 0.1;
         }
 
         private void Rectangle_MouseLeave(object sender, RoutedEventArgs e)
         {
-            if (sender is Rectangle rectangle)
+            if (sender is not Rectangle rectangle)
             {
-                rectangle.Opacity = 0;
+                return;
+            }
+            
+            rectangle.Opacity = 0;
+        }
+
+        private void Rectangle_MouseDown(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Rectangle rectangle)
+            {
+                return;
+            }
+
+            string column_number = rectangle.Name.Replace("r", "");
+
+            try
+            {
+                // Get last free space in this column
+                var pawn = Playground.Children.OfType<Ellipse>()
+                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
+                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
+                    .ToArray()
+                    .Last();
+
+
+                // Add new pawn
+                GLOBALS.redpawns.Add(pawn);
+                pawn.Fill = Brushes.Red;
+                TestLabel.Content = pawn.Name;
+            }
+            catch (InvalidOperationException)
+            {
+                // Do nothing if there's no free space on the board in this column
+                return;
             }
         }
 
@@ -68,6 +111,7 @@ namespace ConnectFour
             {
                 rect.AddHandler(Rectangle.MouseEnterEvent, new RoutedEventHandler(Rectangle_MouseEnter));
                 rect.AddHandler(Rectangle.MouseLeaveEvent, new RoutedEventHandler(Rectangle_MouseLeave));
+                rect.AddHandler(Rectangle.MouseDownEvent, new RoutedEventHandler(Rectangle_MouseDown));
             }
 
             Add_Circles();
