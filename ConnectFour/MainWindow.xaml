@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConnectFour"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="800" Initialized="Window_Initialized">
+    
+    <Grid Name="MainGrid" Margin="45,24,40,8">
+
+        <Canvas Background="DodgerBlue" Name="Playground"></Canvas>
+
+        <Grid Name="Rectangles">
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="0,0,0,0" Grid.Column="1"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="100,0,0,0" Grid.Column="2"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="200,0,0,0" Grid.Column="3"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="300,0,0,0" Grid.Column="4"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="400,0,0,0" Grid.Column="5"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="500,0,0,0" Grid.Column="6"/>
+            <Rectangle HorizontalAlignment="Left" Height="730" Fill="White" Opacity="0" VerticalAlignment="Center" Width="100" Margin="600,0,0,0" Grid.Column="7"/>
+        </Grid>
 
     </Grid>
+    
 </Window>
