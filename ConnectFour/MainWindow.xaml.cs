@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,7 +20,8 @@ namespace ConnectFour
         public static class GLOBALS
         {
             public static List<Ellipse> redpawns = [];
-            public static List<Ellipse> bluepawns = [];
+            public static List<Ellipse> yellowpawns = [];
+            public static string turn = "red";
         }
 
         public MainWindow()
@@ -53,6 +55,54 @@ namespace ConnectFour
             }
         }
 
+        private void Red_Turn(string column_number) 
+        {
+            try
+            {
+                // Get last free space in this column
+                var pawn = Playground.Children.OfType<Ellipse>()
+                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
+                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
+                    .ToArray()
+                    .Last();
+
+
+                // Add new pawn
+                GLOBALS.redpawns.Add(pawn);
+                pawn.Fill = Brushes.Red;
+                TestLabel.Content = pawn.Name;
+            }
+            catch (InvalidOperationException)
+            {
+                // Do nothing if there's no free space on the board in this column
+                return;
+            }
+        }
+
+        private void Yellow_Turn(string column_number)
+        {
+            try
+            {
+                // Get last free space in this column
+                var pawn = Playground.Children.OfType<Ellipse>()
+                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
+                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
+                    .ToArray()
+                    .Last();
+
+
+                // Add new pawn
+                GLOBALS.redpawns.Add(pawn);
+                pawn.Fill = Brushes.Gold;
+                TestLabel.Content = pawn.Name;
+            }
+            catch (InvalidOperationException)
+            {
+                // Do nothing if there's no free space on the board in this column
+                return;
+            }
+        }
+
         private void Rectangle_MouseEnter(object sender, RoutedEventArgs e)
         {
             if (sender is not Rectangle rectangle)
@@ -83,25 +133,15 @@ namespace ConnectFour
 
             string column_number = rectangle.Name.Replace("r", "");
 
-            try
+            if (GLOBALS.turn == "red")
             {
-                // Get last free space in this column
-                var pawn = Playground.Children.OfType<Ellipse>()
-                    .Where(n => n.Name.StartsWith($"circle_{column_number}"))
-                    .Except(GLOBALS.redpawns.OfType<Ellipse>())
-                    .ToArray()
-                    .Last();
-
-
-                // Add new pawn
-                GLOBALS.redpawns.Add(pawn);
-                pawn.Fill = Brushes.Red;
-                TestLabel.Content = pawn.Name;
+                Red_Turn(column_number);
+                GLOBALS.turn = "yellow";
             }
-            catch (InvalidOperationException)
+            else
             {
-                // Do nothing if there's no free space on the board in this column
-                return;
+                Yellow_Turn(column_number);
+                GLOBALS.turn = "red";
             }
         }
 
