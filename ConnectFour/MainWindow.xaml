@@ -8,7 +8,7 @@
         Title="MainWindow" Height="600" Width="600" Initialized="Window_Initialized">
 
     <Grid Name="MainGrid" Margin="45,24,40,8">
-        <Label Content="Label" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Name="TestLabel"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Name="InfoLabel" FontSize="20" FontFamily="Algerian" Width="200" Height="37" TextAlignment="Center"/>
 
         <Canvas Background="DodgerBlue" Name="Playground" Margin="0,50,10,50" Grid.ColumnSpan="2"></Canvas>
         <Grid Name="Rectangles" Margin="0,50,10,50">

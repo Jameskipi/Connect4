@@ -29,6 +29,18 @@ namespace ConnectFour
             InitializeComponent();
         }
 
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            foreach (Rectangle rect in Rectangles.Children)
+            {
+                rect.AddHandler(Rectangle.MouseEnterEvent, new RoutedEventHandler(Rectangle_MouseEnter));
+                rect.AddHandler(Rectangle.MouseLeaveEvent, new RoutedEventHandler(Rectangle_MouseLeave));
+                rect.AddHandler(Rectangle.MouseDownEvent, new RoutedEventHandler(Rectangle_MouseDown));
+            }
+
+            Add_Circles();
+        }
+
         private void Add_Circles()
         {
             // Create circles on the board
@@ -83,30 +95,22 @@ namespace ConnectFour
                 return;
             }
 
+            InfoLabel.Text = $"It's {GLOBALS.turn} turn";
+
             string column_number = rectangle.Name.Replace("r", "");
 
             if (GLOBALS.turn == "red")
             {
                 Red_Turn(column_number);
+                Check_Score();
                 GLOBALS.turn = "yellow";
             }
             else
             {
                 Yellow_Turn(column_number);
+                Check_Score();
                 GLOBALS.turn = "red";
             }
-        }
-
-        private void Window_Initialized(object sender, EventArgs e)
-        {
-            foreach (Rectangle rect in Rectangles.Children)
-            {
-                rect.AddHandler(Rectangle.MouseEnterEvent, new RoutedEventHandler(Rectangle_MouseEnter));
-                rect.AddHandler(Rectangle.MouseLeaveEvent, new RoutedEventHandler(Rectangle_MouseLeave));
-                rect.AddHandler(Rectangle.MouseDownEvent, new RoutedEventHandler(Rectangle_MouseDown));
-            }
-
-            Add_Circles();
         }
     }
 }
