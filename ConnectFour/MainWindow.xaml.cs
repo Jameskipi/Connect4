@@ -40,15 +40,15 @@ namespace ConnectFour
                     var circle = new Ellipse
                     {
                         Name = $"circle_{i}_{j}",
-                        Height = 75,
-                        Width = 75,
+                        Height = 50,
+                        Width = 50,
                         Fill = Brushes.White,
                         StrokeThickness = 5,
                         Stroke = Brushes.Blue
                     };
 
-                    Canvas.SetLeft(circle, 12.5 + (100 * i));
-                    Canvas.SetTop(circle, 30 + (100 * j));
+                    Canvas.SetLeft(circle, 10 + (70 * i));
+                    Canvas.SetTop(circle, 10 + (70 * j));
 
                     Playground.Children.Add(circle);
                 }
