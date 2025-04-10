@@ -8,7 +8,9 @@
         Title="MainWindow" Height="600" Width="600" Initialized="Window_Initialized">
 
     <Grid Name="MainGrid" Margin="45,24,40,8">
+        <Button Content="AI" HorizontalAlignment="Left" Margin="0,16,0,0" VerticalAlignment="Top" Width="30" Height="20" IsEnabled="False"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Name="InfoLabel" FontSize="20" FontFamily="Algerian" Width="200" Height="37" TextAlignment="Center"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="434,16,0,0" VerticalAlignment="Top" Width="55" Height="20" Click="Reset_Click"/>
 
         <Canvas Background="DodgerBlue" Name="Playground" Margin="0,50,10,50" Grid.ColumnSpan="2"></Canvas>
         <Grid Name="Rectangles" Margin="0,50,10,50">

@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -122,23 +123,41 @@ namespace ConnectFour
             List<(int row, int col)> selected = new();
             selected.Add((initial_row, initial_col));
 
-            // Check 4 elements in every direction
+            int new_row = 0, new_col = 0;
+
+            // Check 4 elements in given direction
             for (int i = 1; i < 4; i++)
             {
-                int new_row = initial_row + jump_row * i;
-                int new_col = initial_col + jump_col * i;
+                new_row = initial_row + jump_row * i;
+                new_col = initial_col + jump_col * i;
 
                 if (new_row < 0 || new_row >= 6 || new_col < 0 || new_col >= 7)
-                    return;
+                    break;
 
                 if (board[new_row, new_col] != board[initial_row, initial_col])
-                    return;
+                    break;
 
                 selected.Add((new_row, new_col));
             }
 
-            // This code runs when the game is won
-            InfoLabel.Text = $"Player {GLOBALS.turn.ToUpper()} won";
+            switch (selected.Count)
+            {
+                case 1:
+                    return;
+                case 2:
+                    return;
+                case 3:
+                    // Close to winning
+                    GLOBALS.enemystatus = "aggressive";
+                    return;
+                case 4:
+                    // Game won
+                    InfoLabel.Text = $"Player {GLOBALS.turn.ToUpper()} won";
+                    GLOBALS.gamestatus = false;
+                    break;
+            }
+
+            // Code below runs when the game ends
 
             // Higlight the winning pawns
             foreach (var (row, col) in selected)
@@ -166,6 +185,33 @@ namespace ConnectFour
             foreach (Rectangle rect in Rectangles.Children)
             {
                 rect.IsEnabled = false;
+            }
+        }
+
+        private void Reset()
+        {
+            // Reset global variables
+            GLOBALS.redpawns = [];
+            GLOBALS.yellowpawns = [];
+            GLOBALS.gamestatus = true;
+            GLOBALS.enemystatus = "random";
+
+            InfoLabel.Text = $"It's {GLOBALS.turn} turn";
+
+            // Turn on adding new pawns
+            foreach (Rectangle rect in Rectangles.Children)
+            {
+                rect.IsEnabled = true;
+            }
+
+            // Clear the board
+            var circles = Playground.Children.OfType<Ellipse>()
+                    .Where(n => n.Name.StartsWith($"circle_"));
+
+            foreach (var circle in circles)
+            {
+                circle.Fill = Brushes.White;
+                circle.Stroke = Brushes.Blue;
             }
         }
     }

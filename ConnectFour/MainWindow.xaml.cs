@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,8 @@ namespace ConnectFour
             public static List<Ellipse> redpawns = [];
             public static List<Ellipse> yellowpawns = [];
             public static string turn = "red";
+            public static bool gamestatus = true;
+            public static string enemystatus = "random";
         }
 
         public MainWindow()
@@ -95,8 +98,6 @@ namespace ConnectFour
                 return;
             }
 
-            InfoLabel.Text = $"It's {GLOBALS.turn} turn";
-
             string column_number = rectangle.Name.Replace("r", "");
 
             if (GLOBALS.turn == "red")
@@ -111,6 +112,14 @@ namespace ConnectFour
                 Check_Score();
                 GLOBALS.turn = "red";
             }
+
+            if (GLOBALS.gamestatus) InfoLabel.Text = $"It's {GLOBALS.turn} turn";
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Game restarted");
+            Reset();
         }
     }
 }
