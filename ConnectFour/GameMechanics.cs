@@ -156,18 +156,16 @@ namespace ConnectFour
                     // Close to winning
                     bool next_safe = false;
                     bool before_safe = false;
+                    int next_row = new_row + jump_row;
+                    int next_col = new_col + jump_col;
+                    int before_row = initial_row - jump_row;
+                    int before_col = initial_col - jump_col;
 
                     // Check next possibility
                     try
                     {
-                        int next_row = new_row + jump_row;
-                        int next_col = new_col + jump_col;
-
                         // Fix bug for horizontal prediciton
-                        if (jump_row == 0 && jump_col == 1)
-                        {
-                            next_col -= 1;
-                        }
+                        if (jump_row == 0 && jump_col == 1) next_col -= 1;
 
                         if (board[next_row, next_col] != 0)
                         {
@@ -182,9 +180,6 @@ namespace ConnectFour
                     // Check before possibility
                     try 
                     {
-                        int before_row = initial_row - jump_row;
-                        int before_col = initial_col - jump_col;
-
                         if (board[before_row, before_col] != 0)
                         {
                             before_safe = true;
@@ -198,7 +193,17 @@ namespace ConnectFour
                     // Decide if AI should be aggressive
                     if (next_safe && before_safe)
                     {
-                        GLOBALS.enemystatus = "random";
+                        return;
+                    }
+                    else if (!next_safe)
+                    {
+                        GLOBALS.aggressivemove = next_col;
+                        GLOBALS.enemystatus = "aggressive";
+                    }
+                    else if (!before_safe)
+                    {
+                        GLOBALS.aggressivemove = before_col;
+                        GLOBALS.enemystatus = "aggressive";
                     }
                     else
                     {

@@ -26,6 +26,7 @@ namespace ConnectFour
             public static bool gamestatus = true;
             public static string enemystatus = "random";
             public static bool enemyai = false;
+            public static int aggressivemove = 0;
         }
 
         public MainWindow()

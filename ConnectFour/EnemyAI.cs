@@ -31,6 +31,7 @@ namespace ConnectFour
         private void AI_Random()
         {
             Debug.WriteLine("Random move");
+
             Random random = new Random();
             string random_column = random.Next(0, 7).ToString();
 
@@ -40,7 +41,8 @@ namespace ConnectFour
         private void AI_Aggressive()
         {
             Debug.WriteLine("Aggressive move");
-            Yellow_Turn("0");
+
+            Yellow_Turn(GLOBALS.aggressivemove.ToString());
             GLOBALS.enemystatus = "random";
         }
     }
