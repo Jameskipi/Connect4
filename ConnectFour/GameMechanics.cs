@@ -154,8 +154,59 @@ namespace ConnectFour
                     return;
                 case 3:
                     // Close to winning
-                    GLOBALS.enemystatus = "aggressive";
+                    bool next_safe = false;
+                    bool before_safe = false;
+
+                    // Check next possibility
+                    try
+                    {
+                        int next_row = new_row + jump_row;
+                        int next_col = new_col + jump_col;
+
+                        // Fix bug for horizontal prediciton
+                        if (jump_row == 0 && jump_col == 1)
+                        {
+                            next_col -= 1;
+                        }
+
+                        if (board[next_row, next_col] != 0)
+                        {
+                            next_safe = true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        next_safe = true;
+                    }
+
+                    // Check before possibility
+                    try 
+                    {
+                        int before_row = initial_row - jump_row;
+                        int before_col = initial_col - jump_col;
+
+                        if (board[before_row, before_col] != 0)
+                        {
+                            before_safe = true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        before_safe = true;
+                    }
+
+                    // Decide if AI should be aggressive
+                    if (next_safe && before_safe)
+                    {
+                        GLOBALS.enemystatus = "random";
+                    }
+                    else
+                    {
+                        GLOBALS.enemystatus = "aggressive";
+                    }
+
                     return;
+
                 case 4:
                     // Game won
                     InfoLabel.Text = $"Player {GLOBALS.turn.ToUpper()} won";
