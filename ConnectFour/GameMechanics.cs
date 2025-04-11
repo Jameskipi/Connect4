@@ -57,6 +57,12 @@ namespace ConnectFour
             }
             catch (InvalidOperationException)
             {
+                // If it's ai turn try again
+                if (GLOBALS.enemyai)
+                {
+                    AI_Random();
+                }
+
                 // Do nothing if there's no free space on the board in this column
                 return;
             }
@@ -180,6 +186,7 @@ namespace ConnectFour
         {
             // This code runs if there's not enough space on the board
             InfoLabel.Text = "It's a DRAW";
+            GLOBALS.gamestatus = false;
 
             // Turn off adding new pawns
             foreach (Rectangle rect in Rectangles.Children)
@@ -193,6 +200,7 @@ namespace ConnectFour
             // Reset global variables
             GLOBALS.redpawns = [];
             GLOBALS.yellowpawns = [];
+            GLOBALS.turn = "red";
             GLOBALS.gamestatus = true;
             GLOBALS.enemystatus = "random";
 

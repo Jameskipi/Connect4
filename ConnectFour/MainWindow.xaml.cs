@@ -25,6 +25,7 @@ namespace ConnectFour
             public static string turn = "red";
             public static bool gamestatus = true;
             public static string enemystatus = "random";
+            public static bool enemyai = false;
         }
 
         public MainWindow()
@@ -100,17 +101,24 @@ namespace ConnectFour
 
             string column_number = rectangle.Name.Replace("r", "");
 
-            if (GLOBALS.turn == "red")
+            switch (GLOBALS.turn)
             {
-                Red_Turn(column_number);
-                Check_Score();
-                GLOBALS.turn = "yellow";
-            }
-            else
-            {
-                Yellow_Turn(column_number);
-                Check_Score();
-                GLOBALS.turn = "red";
+                case "red":
+                    Red_Turn(column_number);
+                    Check_Score();
+                    GLOBALS.turn = "yellow";
+                    if (GLOBALS.enemyai) GLOBALS.turn = "ai";
+                    break;
+
+                case "yellow":
+                    Yellow_Turn(column_number);
+                    Check_Score();
+                    GLOBALS.turn = "red";
+                    break;
+
+                case "ai":
+                    AI_Turn(sender);
+                    break;
             }
 
             if (GLOBALS.gamestatus) InfoLabel.Text = $"It's {GLOBALS.turn} turn";
@@ -118,8 +126,22 @@ namespace ConnectFour
 
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Game restarted");
             Reset();
+        }
+
+        private void AI_Click(object sender, RoutedEventArgs e)
+        {
+            if (GLOBALS.enemyai)
+            {
+                GLOBALS.enemyai = false;
+                AI_button.Background = Brushes.LightGray;
+                GLOBALS.turn = "red";
+            }
+            else
+            {
+                GLOBALS.enemyai = true;
+                AI_button.Background = Brushes.Gray;
+            }
         }
     }
 }
